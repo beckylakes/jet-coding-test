@@ -1,7 +1,7 @@
 # JET Coding Test
 
 ## MVP / Checklist ✅
-* Show first 10 results of restaurants with ability to change this when user changes postcode, with following info on each restaurant "card":
+* Get first 10 results of restaurants by postcode, with following info on each restaurant "card":
     - Name
     - Cuisines
     - Rating
