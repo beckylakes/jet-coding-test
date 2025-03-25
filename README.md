@@ -13,7 +13,7 @@
     - any improvements you would make to your solution
     - Send github link/deployed webapp URL
 
-## Tech Stack 🤖
+## Tech Stack 🤖:
 ●​ JavaScript
     - JS runs natively in browsers, no extra compiling needed (like python)
     - JS works both on server and browser (no need to switch languages on backend and frontend i.e. 
