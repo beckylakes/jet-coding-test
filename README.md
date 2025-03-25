@@ -36,3 +36,9 @@
   - Easy to read and makes mobile-first/desktop design consistent
 
 * **Deploy on Vercel** - built for Next.js
+
+## MVP User Stories:
+* As a user, when I input my postcode I am shown a list of restaurants with correlating information for that postcode
+* As a user, when I input an invalid postcode I am shown no results/restaurants
+* As a user, when I don't input any postcode I am shown no results/restaurants
+* As a user, when I don't input any postcode into search bar, I cannot press enter/submit
