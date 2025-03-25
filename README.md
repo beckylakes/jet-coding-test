@@ -29,8 +29,8 @@
       Name of endpoint?), hot module replacement allows devs to see their changes
     - Optimises webapp by loading only what is needed
     - Easy deployment through Vercel
-    x Using React.js would require an API layer Express, or Axios, leading to performance issues.
-    x Manual routing setup in React is less efficient than Next.js
+    - Using React.js would require an API layer Express, or Axios, leading to performance issues.
+    - Manual routing setup in React is less efficient than Next.js
     
 *​ Tailwind CSS:
      - Fast styling, avoids extra CSS files
