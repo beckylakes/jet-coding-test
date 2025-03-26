@@ -1,13 +1,13 @@
 import Image from "next/image";
 
 const Card = ({ restaurant }) => {
-  const { name, address, cuisines, rating } = restaurant;
+  const { name, address, cuisines, rating, logoUrl } = restaurant;
 
   return (
     <div className="group relative flex w-full max-w-[400px] flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-lg">
       <div className="relative w-full h-[180px] bg-gray-200">
         <Image
-          src="/assets/food.png"
+          src={logoUrl}
           alt="Tasty food"
           layout="fill"
           objectFit="cover"
