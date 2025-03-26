@@ -4,9 +4,9 @@ const Collection = ({restaurants}) => {
 
   return (
     <ul>
-      {restaurants.map((restaurant) => {
+      {restaurants.slice(0, 10).map((restaurant) => {
         return (
-          <li id={restaurant?.id}>
+          <li key={restaurant?.id}>
             <Card restaurant={restaurant}/>
           </li>
         )
