@@ -8,8 +8,8 @@ export default async function Home({ searchParams }) {
   const restaurants = await getRestaurants(postcode);
 
   return (
-    <section className="wrapper my-8 flex flex-col gap-8 md:gap-12">
-      <div className="flex w-full flex-colmd:flex-row">
+    <section className="max-w-7xl w-full my-8 flex flex-col gap-8 md:gap-10 lg:mx-auto xl:px-0">
+      <div className="flex max-w-[600px] flex-col md:flex-row">
         <SearchBar />
       </div>
       <Collection restaurants={restaurants} />
