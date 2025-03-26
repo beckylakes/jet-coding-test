@@ -1,4 +1,5 @@
 import Collection from "@/components/Collection";
+import SearchBar from "@/components/SearchBar";
 import { getRestaurants } from "@/utils/api";
 
 export default async function Home() {
@@ -7,6 +8,7 @@ export default async function Home() {
 
   return (
     <section>
+      <SearchBar/>
       <Collection restaurants={restaurants}/>
     </section>
   );
