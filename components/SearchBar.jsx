@@ -42,14 +42,14 @@ const SearchBar = () => {
   }, [postcode, searchParams, router]);
 
   return (
-    <>
+    <div className="flex-center min-h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
       <input
         type="search"
         placeholder="Enter postcode"
         className="flex h-10 w-full rounded-full bg-slate-700 px-3 py-2"
         onChange={(e) => setPostcode(e.target.value)}
       />
-    </>
+    </div>
   );
 };
 
