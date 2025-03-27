@@ -42,7 +42,7 @@ const SearchBar = () => {
   }, [postcode, searchParams, router]);
 
   return (
-    <div className="flex-center min-h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
+    <div className="justify-center items-center min-h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
       <input
         type="search"
         placeholder="Enter postcode"
