@@ -5,15 +5,16 @@ const Header = () => {
   return (
     <header className="w-full border-b-orange-800 bg-[#ff5c21]">
       <div className="wrapper flex items-center justify-between">
-        <Link href="/" className="w-36">
+        <Link href="/" className="w-28 md:w-36 flex-shrink-0">
           <Image
             src="/assets/sample-logo.png"
             width={108}
             height={38}
             alt="Example logo"
+            className="w-full h-auto"
           />
         </Link>
-        <div className="flex w-58 justify-end gap-5">
+        <div className="flex items-center gap-2 sm:gap-5">
         <button className="button">
             Log in
           </button>
