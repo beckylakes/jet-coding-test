@@ -12,35 +12,37 @@ const SearchBar = () => {
   const [postcode, setPostcode] = useState(currentPostcode);
 
   useEffect(() => {
-    // debounce input to prevent excessive API calls?
-    let newUrl = "";
-
-    if (postcode) {
-      //REFACTOR
-      const currentUrl = qs.parse(searchParams.toString());
-      const key = "postcode";
-      const value = postcode.trim();
-
-      currentUrl[key] = value;
-
-      newUrl = qs.stringifyUrl({
-        url: window.location.pathname,
-        query: currentUrl,
-      });
-    } else {
-      //REFACTOR
-      const currentUrl = qs.parse(searchParams.toString());
-      const keysToRemove = ["postcode"];
-
-      keysToRemove.map((key) => delete currentUrl[key]);
-
-      newUrl = qs.stringifyUrl({
-        url: window.location.pathname,
-        query: currentUrl,
-      });
-    }
-    router.push(newUrl);
+    const delayDebounce = setTimeout(() => {
+      let newUrl = "";
+  
+      if (postcode) {
+        const currentUrl = qs.parse(searchParams.toString());
+        const key = "postcode";
+        const value = postcode.trim();
+  
+        currentUrl[key] = value;
+  
+        newUrl = qs.stringifyUrl({
+          url: window.location.pathname,
+          query: currentUrl,
+        });
+      } else {
+        const currentUrl = qs.parse(searchParams.toString());
+        const keysToRemove = ["postcode"];
+  
+        keysToRemove.map((key) => delete currentUrl[key]);
+  
+        newUrl = qs.stringifyUrl({
+          url: window.location.pathname,
+          query: currentUrl,
+        });
+      }
+      router.push(newUrl);
+    }, 600);
+  
+    return () => clearTimeout(delayDebounce);
   }, [postcode, searchParams, router]);
+
 
   return (
     <div className="w-full flex flex-col items-center gap-4">
