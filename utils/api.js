@@ -2,7 +2,7 @@
 
 export async function getRestaurants(postcode) {
   return fetch(
-    `http://uk.api.just-eat.io/discovery/uk/restaurants/enriched/bypostcode/${postcode}`
+    `${process.env.JET_API}${postcode}`
   )
     .then((response) => response.json())
     .then((data) => {
