@@ -8,10 +8,11 @@ const Header = () => {
         <Link href="/" className="w-28 md:w-36 flex-shrink-0">
           <Image
             src="/assets/sample-logo.png"
+            priority
             width={108}
             height={38}
             alt="Example logo"
-            className="w-full h-auto"
+            className="w-full h-auto bg-gray-200 rounded-full"
           />
         </Link>
         <div className="flex items-center gap-2 sm:gap-5">
