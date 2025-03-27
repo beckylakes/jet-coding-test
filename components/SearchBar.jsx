@@ -3,6 +3,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import qs from "query-string";
 import Image from "next/image";
+import { formUrlQuery, removeFromQuery } from "@/utils/utils";
 
 const SearchBar = () => {
   const router = useRouter();
@@ -12,37 +13,27 @@ const SearchBar = () => {
   const [postcode, setPostcode] = useState(currentPostcode);
 
   useEffect(() => {
-    const delayDebounce = setTimeout(() => {
+    const delayDebounce = setTimeout(async () => {
       let newUrl = "";
-  
+
       if (postcode) {
-        const currentUrl = qs.parse(searchParams.toString());
-        const key = "postcode";
-        const value = postcode.trim();
-  
-        currentUrl[key] = value;
-  
-        newUrl = qs.stringifyUrl({
-          url: window.location.pathname,
-          query: currentUrl,
+        newUrl = await formUrlQuery({
+          params: searchParams.toString(),
+          key: "postcode",
+          value: postcode,
         });
       } else {
-        const currentUrl = qs.parse(searchParams.toString());
-        const keysToRemove = ["postcode"];
-  
-        keysToRemove.map((key) => delete currentUrl[key]);
-  
-        newUrl = qs.stringifyUrl({
-          url: window.location.pathname,
-          query: currentUrl,
+        newUrl = await removeFromQuery({
+          params: searchParams.toString,
+          keysToRemove: ["postcode"],
         });
       }
+      
       router.push(newUrl);
-    }, 600);
-  
+    }, 500);
+
     return () => clearTimeout(delayDebounce);
   }, [postcode, searchParams, router]);
-
 
   return (
     <div className="w-full flex flex-col items-center gap-4">
