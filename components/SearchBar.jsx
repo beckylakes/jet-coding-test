@@ -3,6 +3,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import qs from "query-string";
 import Image from "next/image";
+import { formUrlQuery, removeFromQuery } from "@/utils/utils";
 
 const SearchBar = () => {
   const router = useRouter();
@@ -12,34 +13,26 @@ const SearchBar = () => {
   const [postcode, setPostcode] = useState(currentPostcode);
 
   useEffect(() => {
-    // debounce input to prevent excessive API calls?
-    let newUrl = "";
+    const delayDebounce = setTimeout(async () => {
+      let newUrl = "";
 
-    if (postcode) {
-      //REFACTOR
-      const currentUrl = qs.parse(searchParams.toString());
-      const key = "postcode";
-      const value = postcode.trim();
+      if (postcode) {
+        newUrl = await formUrlQuery({
+          params: searchParams.toString(),
+          key: "postcode",
+          value: postcode,
+        });
+      } else {
+        newUrl = await removeFromQuery({
+          params: searchParams.toString,
+          keysToRemove: ["postcode"],
+        });
+      }
+      
+      router.push(newUrl);
+    }, 500);
 
-      currentUrl[key] = value;
-
-      newUrl = qs.stringifyUrl({
-        url: window.location.pathname,
-        query: currentUrl,
-      });
-    } else {
-      //REFACTOR
-      const currentUrl = qs.parse(searchParams.toString());
-      const keysToRemove = ["postcode"];
-
-      keysToRemove.map((key) => delete currentUrl[key]);
-
-      newUrl = qs.stringifyUrl({
-        url: window.location.pathname,
-        query: currentUrl,
-      });
-    }
-    router.push(newUrl);
+    return () => clearTimeout(delayDebounce);
   }, [postcode, searchParams, router]);
 
   return (
