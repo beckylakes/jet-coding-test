@@ -1,7 +1,6 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
-import qs from "query-string";
 import Image from "next/image";
 import { formUrlQuery, removeFromQuery } from "@/utils/utils";
 
@@ -11,7 +10,7 @@ const SearchBar = () => {
   const currentPostcode = searchParams.get("postcode") || "";
 
   const [postcode, setPostcode] = useState(currentPostcode);
-
+  
   useEffect(() => {
     const delayDebounce = setTimeout(async () => {
       let newUrl = "";
@@ -53,7 +52,7 @@ const SearchBar = () => {
           type="search"
           placeholder="Enter postcode"
           className="w-full h-10 bg-transparent outline-none"
-          onChange={(e) => setPostcode(e.target.value)}
+          onChange={(e) => setPostcode(e.target.value.trim())}
         />
       </div>
     </div>
