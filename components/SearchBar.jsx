@@ -2,7 +2,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { formUrlQuery, removeFromQuery } from "@/utils/utils";
+import { formUrlQuery, isValidPostcode, removeFromQuery } from "@/utils/utils";
 
 const SearchBar = () => {
   const router = useRouter();
@@ -10,7 +10,25 @@ const SearchBar = () => {
   const currentPostcode = searchParams.get("postcode") || "";
 
   const [postcode, setPostcode] = useState(currentPostcode);
-  
+  const [error, setError] = useState("");
+
+  const handleInput = (input) => {
+    const formattedInput = input.trim();
+
+    if (formattedInput === "") {
+      setPostcode("");
+      setError("");
+      return;
+    }
+
+    if (isValidPostcode(formattedInput)) {
+      setPostcode(formattedInput);
+      setError("");
+    } else {
+      setError("You cannot use special characters or emojis.");
+    }
+  };
+
   useEffect(() => {
     const delayDebounce = setTimeout(async () => {
       let newUrl = "";
@@ -27,7 +45,7 @@ const SearchBar = () => {
           keysToRemove: ["postcode"],
         });
       }
-      
+
       router.push(newUrl);
     }, 500);
 
@@ -52,9 +70,10 @@ const SearchBar = () => {
           type="search"
           placeholder="Enter postcode"
           className="w-full h-10 bg-transparent outline-none"
-          onChange={(e) => setPostcode(e.target.value.trim())}
+          onChange={(e) => handleInput(e.target.value)}
         />
       </div>
+        {error && <span className=" text-red-500 text-sm">{error}</span>}
     </div>
   );
 };
