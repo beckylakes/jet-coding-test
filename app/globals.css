@@ -28,7 +28,7 @@ body {
   }
 
   .button {
-    @apply px-5 py-2 text-[#ff5A1f] font-semibold bg-white rounded-full border border-white transition duration-300 hover:bg-[#ff7a3d] hover:border-[#ffe9e9] hover:text-white hover:cursor-pointer active:scale-95 text-sm sm:text-base
+    @apply px-3 py-2 text-[#ff5A1f] font-semibold bg-white rounded-full border border-white transition duration-300 hover:bg-[#ff7a3d] hover:border-[#ffe9e9] hover:text-white hover:cursor-pointer active:scale-95 text-xs sm:text-base
   }
 
   .fill-cover {
