@@ -1,9 +1,8 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
-import qs from "query-string";
 import Image from "next/image";
-import { formUrlQuery, removeFromQuery } from "@/utils/utils";
+import { formUrlQuery, isValidPostcode, removeFromQuery } from "@/utils/utils";
 
 const SearchBar = () => {
   const router = useRouter();
@@ -11,6 +10,24 @@ const SearchBar = () => {
   const currentPostcode = searchParams.get("postcode") || "";
 
   const [postcode, setPostcode] = useState(currentPostcode);
+  const [error, setError] = useState("");
+
+  const handleInput = (input) => {
+    const formattedInput = input.trim();
+
+    if (formattedInput === "") {
+      setPostcode("");
+      setError("");
+      return;
+    }
+
+    if (isValidPostcode(formattedInput)) {
+      setPostcode(formattedInput);
+      setError("");
+    } else {
+      setError("You cannot use special characters or emojis.");
+    }
+  };
 
   useEffect(() => {
     const delayDebounce = setTimeout(async () => {
@@ -28,15 +45,15 @@ const SearchBar = () => {
           keysToRemove: ["postcode"],
         });
       }
-      
+
       router.push(newUrl);
-    }, 500);
+    }, 300);
 
     return () => clearTimeout(delayDebounce);
   }, [postcode, searchParams, router]);
 
   return (
-    <div className="w-full flex flex-col items-center gap-4">
+    <div className="w-full flex flex-col items-center gap-2">
       <h2 className="text-2xl font-bold text-gray-800 md:text-3xl">
         Find your next <span className="text-[#ff5a1f]">restaurant</span>
       </h2>
@@ -53,8 +70,21 @@ const SearchBar = () => {
           type="search"
           placeholder="Enter postcode"
           className="w-full h-10 bg-transparent outline-none"
-          onChange={(e) => setPostcode(e.target.value)}
+          onChange={(e) => handleInput(e.target.value)}
         />
+      </div>
+      <div className="min-h-4">
+        {error && (
+          <div class="flex items-center p-1 text-xs text-red-800 border border-red-300 rounded-2xl bg-red-50 max-w-lg w-full" role="alert">
+          <svg class="shrink-0 inline w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+          </svg>
+          <span class="sr-only">Info</span>
+          <div>
+            <span class="font-medium">Oops!</span> {error}
+          </div>
+        </div>
+        )}
       </div>
     </div>
   );

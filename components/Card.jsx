@@ -11,6 +11,7 @@ const Card = ({ restaurant }) => {
           src={logoUrl}
           alt={`Logo for ${name}`}
           fill
+          sizes="1"
           quality={100}
           className="object-cover"
         />

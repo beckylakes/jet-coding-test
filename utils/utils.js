@@ -29,3 +29,5 @@ export async function removeFromQuery({ params, keysToRemove }) {
     { skipNull: true }
   );
 }
+
+export const isValidPostcode = (input) => /^[a-zA-Z0-9\s]+$/.test(input);
