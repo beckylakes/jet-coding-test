@@ -47,7 +47,7 @@ const SearchBar = () => {
       }
 
       router.push(newUrl);
-    }, 500);
+    }, 300);
 
     return () => clearTimeout(delayDebounce);
   }, [postcode, searchParams, router]);
@@ -73,7 +73,9 @@ const SearchBar = () => {
           onChange={(e) => handleInput(e.target.value)}
         />
       </div>
-        {error && <span className=" text-red-500 text-sm">{error}</span>}
+      <div className="h-4">
+        {error && <span className="text-red-500 text-sm">{error}</span>}
+      </div>
     </div>
   );
 };
