@@ -8,7 +8,7 @@ const SearchBar = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const [postcode, setPostcode] = useState("");
+  const [postcode, setPostcode] = useState(searchParams.get('postcode') || '');
   const [error, setError] = useState("");
 
   const handleInput = (input) => {
@@ -53,11 +53,11 @@ const SearchBar = () => {
 
   return (
     <div className="w-full flex flex-col items-center gap-2">
-      <h2 className="text-2xl font-bold text-gray-800 md:text-3xl">
-        Find your next <span className="text-[#ff5a1f]">restaurant</span>
+      <h2 className="text-2xl font-bold text-[#003049] md:text-3xl">
+        Find your next <span className="text-[#dd7200]">restaurant</span>
       </h2>
 
-      <div className="flex items-center w-full max-w-lg px-4 py-2 rounded-full border border-[#ff5a1f50] transition-all duration-300 focus-within:border-[#ff5a1f] focus-within:ring-2 focus-within:ring-[#ff5a1f] bg-gray-100 shadow-sm">
+      <div className="flex items-center w-full max-w-lg px-4 py-2 rounded-full border border-[#511b0850] transition-all duration-300 focus-within:border-[#ff5a1f] focus-within:ring-2 focus-within:ring-[#f77f00] bg-gray-100 shadow-md">
         <Image
           src="/assets/search.svg"
           alt="search"
@@ -68,11 +68,11 @@ const SearchBar = () => {
         <input
           type="search"
           placeholder="Enter postcode"
-          className="w-full h-10 bg-transparent outline-none"
+          className="w-full h-8 md:h-12 bg-transparent outline-none"
           onChange={(e) => handleInput(e.target.value)}
         />
       </div>
-      <div className="min-h-4">
+      <div className="min-h-3">
         {error && (
           <div className="flex items-center p-1 text-xs text-red-800 border border-red-300 rounded-2xl bg-red-50 max-w-lg w-full" role="alert">
           <svg className="shrink-0 inline w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">

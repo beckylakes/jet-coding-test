@@ -1,19 +1,30 @@
+"use server"
+
 import Image from "next/image";
 import Card from "./Card";
 import NoResults from "./NoResults";
 
-const Collection = async ({ restaurants, metaData }) => {
+const Collection = ({ restaurants, metaData }) => {
   const { area } = metaData;
   return restaurants?.length > 0 ? (
     <>
-      <div className="flex items-center gap-2 mb-2">
-        <Image
-          src="/assets/location.svg"
-          width={24}
-          height={24}
-          alt="Location icon"
-        />
-        <p className="text-lg font-semibold text-gray-800 truncate">{area}</p>
+      <div className="flex items-center justify-between mb-0">
+        <div className="flex items-center gap-2">
+          <Image
+            src="/assets/location.svg"
+            priority
+            width={24}
+            height={24}
+            alt="Location icon"
+          />
+          <p className="text-sm md:text-lg font-semibold text-[#003049]">
+            {area}
+          </p>
+        </div>
+
+        <p className="text-sm md:text-lg text-gray-500">
+          Showing 10 of {restaurants.length} results
+        </p>
       </div>
 
       <div className="flex flex-col items-center px-7">

@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 
 const Card = ({ restaurant }) => {
@@ -11,6 +12,7 @@ const Card = ({ restaurant }) => {
           src={logoUrl}
           alt={`Logo for ${name}`}
           fill
+          priority
           sizes="1"
           quality={100}
           className="object-cover"
