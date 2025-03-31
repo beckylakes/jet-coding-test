@@ -41,7 +41,7 @@ const SearchBar = () => {
         });
       } else {
         newUrl = removeFromQuery({
-          params: searchParams.toString,
+          params: searchParams.toString(),
           keysToRemove: ["postcode"],
         });
       }
