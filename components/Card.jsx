@@ -22,7 +22,7 @@ const Card = ({ restaurant }) => {
         </h2>
         <div className="flex justify-between text-gray-700 text-sm">
           <p className="transition-colors duration-300 group-hover:text-orange-700">
-            {rating.starRating} ⭐
+            {rating.starRating === 0 ? "No ratings": rating.starRating } ⭐
           </p>
           <p className="transition-colors duration-300 group-hover:text-orange-700">
             {cuisines

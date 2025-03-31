@@ -13,7 +13,7 @@ const Collection = async ({ restaurants, metaData }) => {
           height={24}
           alt="Location icon"
         />
-        <p className="text-lg font-semibold text-[#ff5a1f] truncate">{area}</p>
+        <p className="text-lg font-semibold text-gray-800 truncate">{area}</p>
       </div>
 
       <div className="flex flex-col items-center px-7">
