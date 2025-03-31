@@ -1,4 +1,4 @@
-import { formUrlQuery, removeFromQuery } from "../utils/utils";
+import { formUrlQuery, removeFromQuery, isValidPostcode } from "../utils/utils";
 
 describe("formUrlQuery", () => {
   test("function should return a string", () => {
@@ -124,22 +124,77 @@ describe("removeFromQuery", () => {
     );
     expect(() =>
       removeFromQuery({ params: "", keysToRemove: undefined })
-    ).toThrow("KeysToRemove is required and must be an array with at least 1 key");
+    ).toThrow(
+      "KeysToRemove is required and must be an array with at least 1 key"
+    );
     expect(() => removeFromQuery({ params: "", keysToRemove: [] })).toThrow(
       "KeysToRemove is required and must be an array with at least 1 key"
     );
   });
 
-  test('removes postcode from query params', async () => {
-    const result = removeFromQuery({ params: 'postcode=SW1A%201AA', keysToRemove: ['postcode'] });
-    expect(result).toBe('/');
+  test("removes postcode from query params", async () => {
+    const result = removeFromQuery({
+      params: "postcode=SW1A%201AA",
+      keysToRemove: ["postcode"],
+    });
+    expect(result).toBe("/");
   });
 
-  test('removes keys with encoded characters', () => {
+  test("removes keys with encoded characters", () => {
     const result = removeFromQuery({
-      params: 'postcode=EC4M%207RF',
-      keysToRemove: ['postcode'],
+      params: "postcode=EC4M%207RF",
+      keysToRemove: ["postcode"],
     });
-    expect(result).toBe('/');
+    expect(result).toBe("/");
+  });
+});
+
+describe("isValidPostcode", () => {
+  test("returns a boolean", () => {
+    expect(typeof isValidPostcode("A")).toBe('boolean');
+  });
+
+  test("should not mutate the input", () => {
+    const input = "ABC123";
+    isValidPostcode(input);
+    expect(input).toEqual("ABC123");
+  });
+
+  test("returns false when too short (less than 2 characters)", () => {
+    expect(isValidPostcode("A")).toBe(false);
+    expect(isValidPostcode("1")).toBe(false);
+  });
+
+  test("returns false when too long (over 8 characters)", () => {
+    expect(isValidPostcode("ABCD12345")).toBe(false);
+    expect(isValidPostcode("A1 B2 C3 D4")).toBe(false);
+  });
+
+  test("returns false for invalid characters", () => {
+    expect(isValidPostcode("EC1A!1BB")).toBe(false);
+    expect(isValidPostcode("EC1A✅1BB")).toBe(false);
+  });
+
+  test("returns false for inputs that are not strings", () => {
+    expect(isValidPostcode(null)).toBe(false);
+    expect(isValidPostcode(undefined)).toBe(false);
+    expect(isValidPostcode(12345)).toBe(false);
+    expect(isValidPostcode({})).toBe(false);
+  });
+
+  test("handles whitespace-only strings", () => {
+    expect(isValidPostcode("  ")).toBe(false);
+    expect(isValidPostcode(" A ")).toBe(false);
+  });
+
+  test("should handle uppercase and lowercase characters", () => {
+    expect(isValidPostcode("ab12cd")).toBe(true);
+    expect(isValidPostcode("AB12cd")).toBe(true);
+  });
+
+  test("returns true for valid postcodes", () => {
+    expect(isValidPostcode("EC4M 7RF")).toBe(true);
+    expect(isValidPostcode("L4 0TH")).toBe(true);
+    expect(isValidPostcode("BN11AE")).toBe(true);
   });
 });

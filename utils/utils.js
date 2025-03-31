@@ -37,4 +37,10 @@ export function removeFromQuery({ params, keysToRemove }) {
   );
 }
 
-export const isValidPostcode = (input) => /^[a-zA-Z0-9\s]+$/.test(input);
+export const isValidPostcode = (input) => {
+  if (typeof input !== "string") return false;
+  const trimmedInput = input.trim()
+  if (trimmedInput.length < 2 || trimmedInput.length > 8) return false;
+
+  return /^[a-zA-Z0-9\s]+$/.test(trimmedInput);
+};
