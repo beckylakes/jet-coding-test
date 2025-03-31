@@ -8,7 +8,7 @@ export default async function Home({ searchParams }) {
   const { metaData, restaurants } = postcode ? await getRestaurants(postcode) : await getRestaurants("EC4M7RF");
 
   return (
-    <section className="wrapper w-full my-6 flex flex-col gap-8 md:gap-10 lg:mx-auto xl:px-0">
+    <section className="wrapper w-full my-6 flex flex-col gap-6 md:gap-10 lg:mx-auto xl:px-0">
       <div className="flex w-full flex-col md:flex-row">
         <SearchBar />
       </div>

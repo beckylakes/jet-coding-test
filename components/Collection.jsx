@@ -9,7 +9,7 @@ const Collection = ({ restaurants, metaData }) => {
   return restaurants?.length > 0 ? (
     <>
       <div className="flex items-center justify-between mb-0">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 md:gap-2">
           <Image
             src="/assets/location.svg"
             priority
@@ -17,13 +17,13 @@ const Collection = ({ restaurants, metaData }) => {
             height={24}
             alt="Location icon"
           />
-          <p className="text-sm md:text-lg font-semibold text-[#003049]">
+          <p className="text-sm md:text-lg font-semibold text-[#003049] line-clamp-1">
             {area}
           </p>
         </div>
 
-        <p className="text-sm md:text-lg text-gray-500">
-          Showing 10 of {restaurants.length} results
+        <p className="text-sm md:text-lg text-gray-500 whitespace-nowrap">
+          Showing 10 of {restaurants.length} places
         </p>
       </div>
 
