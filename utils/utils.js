@@ -1,6 +1,10 @@
 import qs from "query-string";
 
-export async function formUrlQuery({ params, key, value }) {
+export function formUrlQuery({ params, key, value }) {
+  if (typeof params !== 'string') throw new Error('Params must be a string');
+  if (!key || typeof key !== 'string') throw new Error('Key is required and must be a string');
+  if (!value || typeof value !== 'string') throw new Error('Value is required and must be a string');
+
   const currentUrl = qs.parse(params);
 
   currentUrl[key] = value;
@@ -14,7 +18,10 @@ export async function formUrlQuery({ params, key, value }) {
   );
 }
 
-export async function removeFromQuery({ params, keysToRemove }) {
+export function removeFromQuery({ params, keysToRemove }) {
+  if (typeof params !== 'string') throw new Error('Params must be a string');
+  if (!keysToRemove || !Array.isArray(keysToRemove) || keysToRemove.length === 0) throw new Error('KeysToRemove is required and must be an array with at least 1 key');
+
   const currentUrl = qs.parse(params);
 
   keysToRemove.forEach((key) => {
@@ -30,4 +37,10 @@ export async function removeFromQuery({ params, keysToRemove }) {
   );
 }
 
-export const isValidPostcode = (input) => /^[a-zA-Z0-9\s]+$/.test(input);
+export const isValidPostcode = (input) => {
+  if (typeof input !== "string") return false;
+  const trimmedInput = input.trim()
+  if (trimmedInput.length < 2 || trimmedInput.length > 8) return false;
+
+  return /^[a-zA-Z0-9\s]+$/.test(trimmedInput);
+};

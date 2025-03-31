@@ -25,23 +25,23 @@ const SearchBar = () => {
       setPostcode(formattedInput);
       setError("");
     } else {
-      setError("You cannot use special characters or emojis.");
+      setError("Postcodes must be 2-8 characters long, and you cannot use special characters or emojis.");
     }
   };
 
   useEffect(() => {
-    const delayDebounce = setTimeout(async () => {
+    const delayDebounce = setTimeout(() => {
       let newUrl = "";
 
       if (postcode) {
-        newUrl = await formUrlQuery({
+        newUrl = formUrlQuery({
           params: searchParams.toString(),
           key: "postcode",
           value: postcode,
         });
       } else {
-        newUrl = await removeFromQuery({
-          params: searchParams.toString,
+        newUrl = removeFromQuery({
+          params: searchParams.toString(),
           keysToRemove: ["postcode"],
         });
       }
@@ -75,13 +75,13 @@ const SearchBar = () => {
       </div>
       <div className="min-h-4">
         {error && (
-          <div class="flex items-center p-1 text-xs text-red-800 border border-red-300 rounded-2xl bg-red-50 max-w-lg w-full" role="alert">
-          <svg class="shrink-0 inline w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+          <div className="flex items-center p-1 text-xs text-red-800 border border-red-300 rounded-2xl bg-red-50 max-w-lg w-full" role="alert">
+          <svg className="shrink-0 inline w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
           </svg>
-          <span class="sr-only">Info</span>
+          <span className="sr-only">Info</span>
           <div>
-            <span class="font-medium">Oops!</span> {error}
+            <span className="font-medium">Oops!</span> {error}
           </div>
         </div>
         )}
