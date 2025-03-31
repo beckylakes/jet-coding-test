@@ -7,9 +7,8 @@ import { formUrlQuery, isValidPostcode, removeFromQuery } from "@/utils/utils";
 const SearchBar = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const currentPostcode = searchParams.get("postcode") || "";
 
-  const [postcode, setPostcode] = useState(currentPostcode);
+  const [postcode, setPostcode] = useState("");
   const [error, setError] = useState("");
 
   const handleInput = (input) => {
