@@ -30,17 +30,17 @@ const SearchBar = () => {
   };
 
   useEffect(() => {
-    const delayDebounce = setTimeout(async () => {
+    const delayDebounce = setTimeout(() => {
       let newUrl = "";
 
       if (postcode) {
-        newUrl = await formUrlQuery({
+        newUrl = formUrlQuery({
           params: searchParams.toString(),
           key: "postcode",
           value: postcode,
         });
       } else {
-        newUrl = await removeFromQuery({
+        newUrl = removeFromQuery({
           params: searchParams.toString,
           keysToRemove: ["postcode"],
         });

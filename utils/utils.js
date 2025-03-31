@@ -1,6 +1,10 @@
 import qs from "query-string";
 
-export async function formUrlQuery({ params, key, value }) {
+export function formUrlQuery({ params, key, value }) {
+  if (typeof params !== 'string') throw new Error('Params must be a string');
+  if (!key || typeof key !== 'string') throw new Error('Key is required and must be a string');
+  if (!value || typeof value !== 'string') throw new Error('Value is required and must be a string');
+
   const currentUrl = qs.parse(params);
 
   currentUrl[key] = value;
@@ -14,7 +18,7 @@ export async function formUrlQuery({ params, key, value }) {
   );
 }
 
-export async function removeFromQuery({ params, keysToRemove }) {
+export function removeFromQuery({ params, keysToRemove }) {
   const currentUrl = qs.parse(params);
 
   keysToRemove.forEach((key) => {
