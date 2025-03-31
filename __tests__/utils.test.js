@@ -1,4 +1,4 @@
-import { formUrlQuery } from "../utils/utils";
+import { formUrlQuery, removeFromQuery } from "../utils/utils";
 
 describe("formUrlQuery", () => {
   test("function should return a string", () => {
@@ -84,5 +84,62 @@ describe("formUrlQuery", () => {
       value: "EC4M 7RF",
     });
     expect(result).toBe("/?postcode=EC4M%207RF");
+  });
+});
+
+describe("removeFromQuery", () => {
+  test("function should return a string", () => {
+    const result = removeFromQuery({
+      params: "",
+      keysToRemove: ["postcode"],
+    });
+
+    expect(typeof result).toBe("string");
+  });
+
+  test("should not mutate the input", () => {
+    const input = { params: "test", keysToRemove: ["postcode"] };
+    removeFromQuery(input);
+    expect(input).toEqual({ params: "test", keysToRemove: ["postcode"] });
+  });
+
+  test("should return error when params is not a string", () => {
+    expect(() =>
+      removeFromQuery({ params: null, keysToRemove: "postcode" })
+    ).toThrow("Params must be a string");
+    expect(() =>
+      removeFromQuery({ params: undefined, keysToRemove: "postcode" })
+    ).toThrow("Params must be a string");
+    expect(() =>
+      removeFromQuery({ params: [], keysToRemove: "postcode" })
+    ).toThrow("Params must be a string");
+  });
+
+  test("should return error when keysToRemove is not an array, or empty", () => {
+    expect(() => removeFromQuery({ params: "", keysToRemove: "123" })).toThrow(
+      "KeysToRemove is required and must be an array with at least 1 key"
+    );
+    expect(() => removeFromQuery({ params: "", keysToRemove: null })).toThrow(
+      "KeysToRemove is required and must be an array with at least 1 key"
+    );
+    expect(() =>
+      removeFromQuery({ params: "", keysToRemove: undefined })
+    ).toThrow("KeysToRemove is required and must be an array with at least 1 key");
+    expect(() => removeFromQuery({ params: "", keysToRemove: [] })).toThrow(
+      "KeysToRemove is required and must be an array with at least 1 key"
+    );
+  });
+
+  test('removes postcode from query params', async () => {
+    const result = removeFromQuery({ params: 'postcode=SW1A%201AA', keysToRemove: ['postcode'] });
+    expect(result).toBe('/');
+  });
+
+  test('removes keys with encoded characters', () => {
+    const result = removeFromQuery({
+      params: 'postcode=EC4M%207RF',
+      keysToRemove: ['postcode'],
+    });
+    expect(result).toBe('/');
   });
 });

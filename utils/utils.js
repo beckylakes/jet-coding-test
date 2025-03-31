@@ -19,6 +19,9 @@ export function formUrlQuery({ params, key, value }) {
 }
 
 export function removeFromQuery({ params, keysToRemove }) {
+  if (typeof params !== 'string') throw new Error('Params must be a string');
+  if (!keysToRemove || !Array.isArray(keysToRemove) || keysToRemove.length === 0) throw new Error('KeysToRemove is required and must be an array with at least 1 key');
+
   const currentUrl = qs.parse(params);
 
   keysToRemove.forEach((key) => {
