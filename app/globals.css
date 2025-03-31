@@ -1,25 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #0a0a0a;
+  --background: #FAFAFA;
 }
 
 @theme inline {
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #0a0a0a;
   }
 }
 
 body {
-
   font-family: var(--font-poppins);
+  background-color: var(--background);
 }
 
 @layer utilities {
@@ -28,7 +26,7 @@ body {
   }
 
   .button {
-    @apply px-3 py-2 text-[#ff5A1f] font-semibold bg-white rounded-full border border-white transition duration-300 hover:bg-[#ff7a3d] hover:border-[#ffe9e9] hover:text-white hover:cursor-pointer active:scale-95 text-xs sm:text-base
+    @apply px-3 py-2 text-[#003049] font-semibold bg-white rounded-full border border-white transition duration-300 hover:bg-[#fcbf49] hover:border-[#ffe9e9] hover:text-white hover:cursor-pointer active:scale-95 text-xs sm:text-base
   }
 
   .fill-cover {

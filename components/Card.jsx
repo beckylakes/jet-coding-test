@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 
 const Card = ({ restaurant }) => {
@@ -11,6 +12,7 @@ const Card = ({ restaurant }) => {
           src={logoUrl}
           alt={`Logo for ${name}`}
           fill
+          priority
           sizes="1"
           quality={100}
           className="object-cover"
@@ -22,7 +24,7 @@ const Card = ({ restaurant }) => {
         </h2>
         <div className="flex justify-between text-gray-700 text-sm">
           <p className="transition-colors duration-300 group-hover:text-orange-700">
-            {rating.starRating} ⭐
+            {rating.starRating === 0 ? "No ratings": rating.starRating } ⭐
           </p>
           <p className="transition-colors duration-300 group-hover:text-orange-700">
             {cuisines
