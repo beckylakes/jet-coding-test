@@ -25,6 +25,7 @@ A responsive web application that displays 10 restaurants based on user's postco
   - Address
 - Input validation
 - Mobile-friendly design
+- Unit and Integration tests
 
 
 ## Technology Stack
@@ -63,19 +64,21 @@ npm run dev
 ```
 *This will start your local development server, and can be accessed via your browser at http://localhost:3000/*.
 
-5. Create a '.env' file with the following:
+5. Run tests using:
+```bash
+npm run test
+```
+
+6. Create a '.env' file with the following:
 ```bash
 JET_API=http://uk.api.just-eat.io/discovery/uk/restaurants/enriched/bypostcode/
 ```
 *Based on best practices, this has been extracted into a .env file for security despite being a public API*
 
-
 ## Project Timeline - Overview
 * **Day 1**: Requirements analysis, research, wireframing, user stories, initial project setup
 * **Day 2**: Core functionality implementation for MVP
-* **Day 3**: Styling, optimising code
-* **Day 4**: Minor debugging and styling, writing README
-
+* **Day 3+**: Styling, optimising code, debugging, writing tests & editing README
 
 ## Planning
 Please refer to my files "Planning for JET" and "wireframe" to see more on my planning roadmap, otherwise view git history to view my iterative improvements.
@@ -89,11 +92,11 @@ Please refer to my files "Planning for JET" and "wireframe" to see more on my pl
 * **Data Consistency**: Assumed API responses to contain array of objects with consistent fields:
     - { name: String, cuisines: Array, rating.starRating: Number, address: { firstLine: String, city: String } }
 * **Default Location**: Used "EC4M7RF" to fetch data (can immediately be replaced upon user input) on first load to:
-  - Show UI on first load
+  - Show users UI on first load
   - Test API connection during development
 * **Error Handling**: Did not differentiate between invalid / valid postcodes with no restaurants
     - Handled empty arrays as "no results" case
-* **Data Display**: Displayed ratings as decimal number with star, and limited cuisines to first 2 items to:
+* **Data Display**: Displayed ratings as decimal number with star (or "No rating" if new restaurant), and limited cuisines to first 2 items to:
   - Avoid irrelevant cuisine names such as "Low Delivery Fee"
   - Achieve visual consistency on each card
 * **Input Handling**: Handled postcode inputs with and without spaces (e.g. "EC4M7RF" or "EC4M 7RF"), blocked special characters or emojis and empty inputs
@@ -118,6 +121,8 @@ Please refer to my files "Planning for JET" and "wireframe" to see more on my pl
 ### Improvements upon retrospection
 * Implement TDD through unit, integration and E2E testing
 * Utilise TypeScript for better data typing and control
+* Change homepage to just SearchBar, where user must input their postcode to reduce unnecessary calls to API
+* Use component libraries to be more time efficient
 
 ### Future scope improvements
 * **Enhance Functionality and UI**:
@@ -129,13 +134,16 @@ Please refer to my files "Planning for JET" and "wireframe" to see more on my pl
   - Add hamburger menu for mobile devices
   - User login/signup functionality
   - Results pagination
+  - Migrate to TypeScript
+  - Component testing on front-end
+
 * **Improve Accessibility**:
   - Keyboard navigation support (e.g. submit button for SearchBar, 'Back to Top' button)
   - ARIA labels for screen readers
-  - Colour contrast for readability
 
 ## Testing / Quality Checks
+* Implemented unit and integration testing using Jest and Supertest, making mock functions to test data and reduce calls to API.
 * Utilised tools such as Insomnia, DevTools and manual testing to check for bugs and edge cases such as:
     - Invalid postcodes
     - Invalid characters
-    - Postcodes with no restaurants ("ZE2")
+    - Postcodes with no restaurants (e.g. "ZE2")
