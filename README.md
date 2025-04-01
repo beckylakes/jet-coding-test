@@ -126,6 +126,7 @@ Please refer to my files "Planning for JET" and "wireframe" to see more on my pl
 
 ### Future scope improvements
 * **Enhance Functionality and UI**:
+  - Optimise code organisation and readability
   - Auto-detect with geolocation API to suggest nearby restaurants to user on page load (note: considerations for user security/privacy)
   - Sort and filter options (e.g. by rating, by cuisine, by name etc.)
   - Add loading spinner/skeletons during API data fetching
