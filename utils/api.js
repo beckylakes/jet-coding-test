@@ -5,7 +5,4 @@ export async function getRestaurants(postcode) {
     `${process.env.JET_API}${postcode}`
   )
     .then((response) => response.json())
-    .then((data) => {
-      return data;
-    });
 }

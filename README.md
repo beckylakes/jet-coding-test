@@ -127,6 +127,7 @@ Please refer to my files "Planning for JET" and "wireframe" to see more on my pl
 ### Future scope improvements
 * **Enhance Functionality and UI**:
   - Optimise code organisation and readability
+  - Fix double-rendering on first loadup of fetched data
   - Auto-detect with geolocation API to suggest nearby restaurants to user on page load (note: considerations for user security/privacy)
   - Sort and filter options (e.g. by rating, by cuisine, by name etc.)
   - Add loading spinner/skeletons during API data fetching
@@ -136,7 +137,7 @@ Please refer to my files "Planning for JET" and "wireframe" to see more on my pl
   - User login/signup functionality
   - Results pagination
   - Migrate to TypeScript
-  - Component testing on front-end
+  - Component testing for front-end
 
 * **Improve Accessibility**:
   - Keyboard navigation support (e.g. submit button for SearchBar, 'Back to Top' button)
